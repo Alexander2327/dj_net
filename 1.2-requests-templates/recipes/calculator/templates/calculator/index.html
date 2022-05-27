@@ -5,8 +5,13 @@
     <title>Рецепты</title>
 </head>
 <body>
+{% load mathfilters %}
 {% for ingredient, amount in recipe.items %}
-    <p>{{ ingredient }}: {{ amount }}</p>
+    {% if servings %}
+        <p>{{ ingredient }}: {{ amount|mul:servings}}</p>
+    {% else %}
+        <p>{{ ingredient }}: {{ amount }}</p>
+    {% endif %}
 {% empty %}
     <p>Такого рецепта не знаю :(</p>
 {% endfor %}
