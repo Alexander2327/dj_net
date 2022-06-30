@@ -1,4 +1,4 @@
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFromToRangeFilter, NumberFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.viewsets import ModelViewSet
@@ -6,15 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Advertisement
 from .permissions import UpdateDeletePermission
 from .serializers import AdvertisementSerializer
-
-
-class AdvertisementFilter(FilterSet):
-    created_at = DateFromToRangeFilter(field_name='created_at')
-    creator = NumberFilter(field_name='creator_id')
-
-    class Meta:
-        model = Advertisement
-        fields = ('created_at', 'creator_id')
+from .filters import AdvertisementFilter
 
 
 class AdvertisementViewSet(ModelViewSet):
